@@ -3,6 +3,7 @@ package com.mvillasenor.twitter.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.mvillasenor.twitter.data.cloud.CloudUtils;
 import com.mvillasenor.twitter.data.cloud.UserRepositoryCloudImpl;
 import com.mvillasenor.twitter.data.cloud.retrofit.RetrofitClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.UserClient;
@@ -46,12 +47,20 @@ public class UserRepositoryProvider {
 
     public UserRepository getUserRepository() {
         UserClient client = retrofitClient.getUserClient();
-        Realm realm = Realm.getDefaultInstance();
-        long users = realm.where(User.class).count();
-        if(users >0){
+
+        if(shoudGetDb()){
             return new UserRepositoryDbImpl();
         }else{
             return new UserRepositoryCloudImpl(client);
         }
+    }
+
+    public boolean shoudGetDb(){
+        Realm realm = Realm.getDefaultInstance();
+        long users = realm.where(User.class).count();
+        boolean isCached = CacheContainer.getInstance().isProfileCached();
+        boolean isConnected = CloudUtils.isConnected(context);
+
+        return users > 0 && (isCached || !isConnected);
     }
 }

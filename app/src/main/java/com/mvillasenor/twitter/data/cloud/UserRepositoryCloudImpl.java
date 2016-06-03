@@ -1,5 +1,6 @@
 package com.mvillasenor.twitter.data.cloud;
 
+import com.mvillasenor.twitter.data.CacheContainer;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.UserClient;
 import com.mvillasenor.twitter.data.interfaces.UserRepository;
 import com.mvillasenor.twitter.models.user.User;
@@ -31,6 +32,7 @@ public class UserRepositoryCloudImpl implements UserRepository {
                         realm.beginTransaction();
                         realm.copyToRealmOrUpdate(user);
                         realm.commitTransaction();
+                        CacheContainer.getInstance().setProfileCached(true);
                     }
                 })
                 .subscribeOn(Schedulers.newThread())

@@ -29,9 +29,6 @@ public class ProfileFragment extends BaseFragment {
     private ImageView mBackgroudPicture;
     private TextView mUserName;
     private TextView mDescription;
-
-    private User mUser;
-
     private Subscription userSubscription;
 
     public static ProfileFragment newInstance() {
@@ -59,9 +56,7 @@ public class ProfileFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mUser == null) {
-            requestUser();
-        }
+        requestUser();
     }
 
 
@@ -93,7 +88,6 @@ public class ProfileFragment extends BaseFragment {
     }
 
     public void loadInfo(User user) {
-        mUser = user;
         mUserName.setText(user.getName());
         if (getActivity() != null && ((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
             getActivity().setTitle(user.getName());

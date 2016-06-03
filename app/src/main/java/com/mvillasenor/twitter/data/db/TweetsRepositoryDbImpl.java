@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -23,6 +24,7 @@ public class TweetsRepositoryDbImpl implements TweetsRepository {
 
         return realm.where(Tweet.class)
                 .findAll()
+                .sort("id", Sort.DESCENDING)
                 .asObservable()
                 .map(new Func1<RealmResults<Tweet>, List<Tweet>>() {
                     @Override

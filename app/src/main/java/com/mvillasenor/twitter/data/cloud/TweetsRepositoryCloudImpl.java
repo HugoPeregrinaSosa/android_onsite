@@ -1,5 +1,6 @@
 package com.mvillasenor.twitter.data.cloud;
 
+import com.mvillasenor.twitter.data.CacheContainer;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.TweetsClient;
 import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
 import com.mvillasenor.twitter.models.tweet.Tweet;
@@ -33,6 +34,7 @@ public class TweetsRepositoryCloudImpl implements TweetsRepository {
                         realm.beginTransaction();
                         realm.copyToRealmOrUpdate(tweets);
                         realm.commitTransaction();
+                        CacheContainer.getInstance().setTweetsCached(true);
                     }
                 })
                 .subscribeOn(Schedulers.newThread())
@@ -49,6 +51,7 @@ public class TweetsRepositoryCloudImpl implements TweetsRepository {
                         realm.beginTransaction();
                         realm.copyToRealmOrUpdate(tweet);
                         realm.commitTransaction();
+                        CacheContainer.getInstance().setTweetsCached(true);
                     }
                 })
                 .subscribeOn(Schedulers.newThread())
