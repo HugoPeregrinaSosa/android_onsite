@@ -92,6 +92,7 @@ public class SearchTweetActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void call(Throwable throwable) {
                         Snackbar.make(findViewById(R.id.main_view), throwable.getMessage(), Snackbar.LENGTH_LONG).show();
+                        Log.e("SearchTweet", throwable.getMessage(), throwable);
                     }
                 });
     }

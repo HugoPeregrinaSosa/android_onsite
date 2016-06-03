@@ -32,10 +32,7 @@ public class User extends RealmObject {
     @SerializedName("url")
     @Expose
     private String url;
-    @SerializedName("entities")
-    @Expose
-    @Ignore
-    private Entities entities;
+
     @SerializedName("protected")
     @Expose
     private Boolean _protected;
@@ -241,19 +238,7 @@ public class User extends RealmObject {
         this.url = url;
     }
 
-    /**
-     * @return The entities
-     */
-    public Entities getEntities() {
-        return entities;
-    }
 
-    /**
-     * @param entities The entities
-     */
-    public void setEntities(Entities entities) {
-        this.entities = entities;
-    }
 
     /**
      * @return The _protected
