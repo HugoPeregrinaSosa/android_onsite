@@ -3,6 +3,7 @@ package com.mvillasenor.twitter.data.cloud.retrofit;
 import android.content.Context;
 
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.SentimentClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.TweetsClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.UserClient;
 
@@ -19,7 +20,8 @@ public class RetrofitClient {
 
     private static RetrofitClient instance;
 
-    private Retrofit retrofit;
+    private Retrofit twitter;
+    private Retrofit sentiment;
     private Context context;
 
     private RetrofitClient(Context context) {
@@ -29,8 +31,15 @@ public class RetrofitClient {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        retrofit = new Retrofit.Builder()
+        twitter = new Retrofit.Builder()
                 .baseUrl(context.getString(R.string.base_url))
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        sentiment = new Retrofit.Builder()
+                .baseUrl(context.getString(R.string.sentiment_base_url))
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -45,11 +54,15 @@ public class RetrofitClient {
     }
 
     public UserClient getUserClient() {
-        return retrofit.create(UserClient.class);
+        return twitter.create(UserClient.class);
     }
 
     public TweetsClient getTweetsClient() {
-        return retrofit.create(TweetsClient.class);
+        return twitter.create(TweetsClient.class);
+    }
+
+    public SentimentClient getSentimentClient() {
+        return twitter.create(SentimentClient.class);
     }
 
 }

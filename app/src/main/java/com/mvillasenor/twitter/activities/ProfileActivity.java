@@ -19,7 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setTitle("Profile");
+        setTitle(getString(R.string.profile));
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);

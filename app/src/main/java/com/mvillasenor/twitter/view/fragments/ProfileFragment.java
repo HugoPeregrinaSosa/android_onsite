@@ -127,11 +127,7 @@ public class ProfileFragment extends BaseFragment {
     }
 
 
-    public void showError(String error) {
-        if (getView() != null) {
-            Snackbar.make(getView(), error, Snackbar.LENGTH_SHORT).show();
-        }
-    }
+
 
 
 }

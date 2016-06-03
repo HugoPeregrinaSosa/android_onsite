@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by migue on 31/05/2016.
@@ -32,7 +30,8 @@ public class TweetsFragment extends BaseFragment {
 
     private RecyclerView tweetsRecycler;
     private TweetAdapter adapter;
-    private List<Tweet> tweetList = new ArrayList<>();;
+    private List<Tweet> tweetList = new ArrayList<>();
+    ;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private Subscription tweetsSubscription;
@@ -74,7 +73,7 @@ public class TweetsFragment extends BaseFragment {
         tweetsRecycler.setAdapter(adapter);
     }
 
-    private void initializeSwipeRefresh(){
+    private void initializeSwipeRefresh() {
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -120,9 +119,6 @@ public class TweetsFragment extends BaseFragment {
         tweetsRecycler.setAdapter(adapter);
     }
 
-    public void showError(String error) {
-        Snackbar.make(getView(), error, Snackbar.LENGTH_SHORT).show();
-    }
 
 
 }

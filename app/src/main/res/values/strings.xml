@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Twitter</string>
     <string name="base_url">https://wizetwitterproxy.herokuapp.com</string>
-    <string name="profile">https://wizetwitterproxy.herokuapp.com</string>
+    <string name="sentiment_base_url">http://text-processing.com/</string>
+    <string name="profile">Profile</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="website">Website</string>
+    <string name="birthday">Birthday</string>
 </resources>
