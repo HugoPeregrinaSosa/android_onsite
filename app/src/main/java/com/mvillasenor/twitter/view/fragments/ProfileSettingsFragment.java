@@ -3,6 +3,7 @@ package com.mvillasenor.twitter.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.mvillasenor.twitter.view.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 import io.realm.Realm;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -25,7 +27,7 @@ import rx.functions.Action1;
 /**
  * Created by MarthaKarina on 03/06/2016.
  */
-public class ProfileSettingsFragment extends BaseFragment {
+public class ProfileSettingsFragment extends BaseFragment implements DatePickerFragment.OnBirthdaySelected {
 
     @BindView(R.id.background_image)
     ImageView backgroundImage;
@@ -61,6 +63,7 @@ public class ProfileSettingsFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.profile_settings_fragment, container, false);
 
         ButterKnife.bind(this, view);
+
         return view;
     }
 
@@ -92,6 +95,7 @@ public class ProfileSettingsFragment extends BaseFragment {
         userName.setText(user.getName());
         description.setText(user.getDescription());
         location.setText(user.getLocation());
+        website.setText(user.getWebsite());
 
         Glide.with(getActivity())
                 .load(user.getProfileImageUrl())
@@ -105,6 +109,13 @@ public class ProfileSettingsFragment extends BaseFragment {
                 .into(backgroundImage);
 
 
+    }
+
+    @OnFocusChange(R.id.birthday)
+    public void setBirthday(View v) {
+        if (v.isFocused()) {
+            showDatePickerDialog();
+        }
     }
 
     @OnClick(R.id.save)
@@ -123,4 +134,19 @@ public class ProfileSettingsFragment extends BaseFragment {
         realm.commitTransaction();
         getActivity().finish();
     }
+
+
+
+    public void showDatePickerDialog() {
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.setListener(this);
+        newFragment.show(getChildFragmentManager(), getString(R.string.birthday));
+    }
+
+    @Override
+    public void onBirthdaySelected(String birthday) {
+        this.birthday.setText(birthday);
+    }
+
+
 }

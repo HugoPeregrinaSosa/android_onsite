@@ -20,64 +20,70 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
-        android:layout_marginTop="?attr/actionBarSize"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="@android:color/white"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/et_newtweet_tweetcontent"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/newtweet_content_background"
-            android:gravity="top"
-            android:maxLength="140"
-            android:padding="5dp"
-            android:textColor="@android:color/black" />
+            android:layout_height="wrap_content"
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_newtweet_tweetcontent"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/newtweet_content_background"
+                android:gravity="top"
+                android:maxLength="140"
+                android:padding="5dp"
+                android:textColor="@android:color/black" />
 
-                <TextView
-                    android:id="@+id/tv_newtweet_remainingcharacters"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="140"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:background="@color/colorPrimary"
-                    android:textColor="@android:color/white"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:id="@+id/bt_newtweet_dotweet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/tweet" />
+                    <TextView
+                        android:id="@+id/tv_newtweet_remainingcharacters"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="140"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/bt_newtweet_dotweet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@color/colorPrimary"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="@string/tweet"
+                        android:textColor="@android:color/white" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_newtweet_photos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_newtweet_photos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

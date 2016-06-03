@@ -24,6 +24,7 @@
             android:parentActivityName=".MainActivity"/>
 
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".activities.NewTweetActivity"
             android:parentActivityName=".MainActivity"/>
 

@@ -1,6 +1,7 @@
 package com.mvillasenor.twitter.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,14 @@ public class SingleTweetActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_singletweet);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle(getString(R.string.app_name));
+        mToolbar.setTitleTextColor(Color.WHITE);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent().getExtras() != null) {
             tweetContent = getIntent().getStringExtra("tweetId");
