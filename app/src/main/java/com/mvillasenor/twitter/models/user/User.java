@@ -139,6 +139,10 @@ public class User extends RealmObject {
     @Expose
     private Boolean notifications;
 
+    private String website;
+
+    private String birthday;
+
     /**
      * @return The id
      */
@@ -727,4 +731,19 @@ public class User extends RealmObject {
         this.notifications = notifications;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 }
