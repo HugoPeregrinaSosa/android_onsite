@@ -14,11 +14,14 @@ public class SingleTweetActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_singletweet);
 
-        Long tweetId = getIntent().getLongExtra("tweetId", -1);
+        String tweetContent = null;
+        if (getIntent().getExtras() != null) {
+            tweetContent = getIntent().getStringExtra("tweetId");
+        }
 
-        if (tweetId != -1) {
+        if (tweetContent != null) {
             // TODO: 6/3/16 Load tweet data, and fill fields
-            ((TextView)findViewById(R.id.tv_singletweet_content)).setText("Load data, please");
+            ((TextView) findViewById(R.id.tv_singletweet_content)).setText(tweetContent);
 
         }
 
