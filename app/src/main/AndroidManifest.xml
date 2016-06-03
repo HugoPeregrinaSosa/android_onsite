@@ -22,6 +22,13 @@
 
         <activity android:name=".activities.ProfileActivity"
             android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".NewTweetActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+
     </application>
 
 </manifest>
