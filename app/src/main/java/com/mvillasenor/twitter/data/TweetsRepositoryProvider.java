@@ -3,12 +3,14 @@ package com.mvillasenor.twitter.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.mvillasenor.twitter.data.cloud.CloudUtils;
 import com.mvillasenor.twitter.data.cloud.TweetsRepositoryCloudImpl;
 import com.mvillasenor.twitter.data.cloud.retrofit.RetrofitClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.TweetsClient;
 import com.mvillasenor.twitter.data.db.TweetsRepositoryDbImpl;
 import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
 import com.mvillasenor.twitter.models.tweet.Tweet;
+import com.mvillasenor.twitter.models.user.User;
 
 import io.realm.Realm;
 
@@ -44,14 +46,21 @@ public class TweetsRepositoryProvider {
         return instance;
     }
 
-    public TweetsRepository getTweetsRepository(boolean forceUpdate) {
-        Realm realm = Realm.getDefaultInstance();
-        long tweetsNumber = realm.where(Tweet.class).count();
-        if (tweetsNumber > 0 && !forceUpdate) {
+    public TweetsRepository getTweetsRepository(boolean forceCloud) {
+        if (shoudGetDb() && !forceCloud) {
             return new TweetsRepositoryDbImpl();
         } else {
             TweetsClient client = retrofitClient.getTweetsClient();
             return new TweetsRepositoryCloudImpl(client);
         }
+    }
+
+    public boolean shoudGetDb(){
+        Realm realm = Realm.getDefaultInstance();
+        long tweetsNumber = realm.where(Tweet.class).count();
+        boolean isCached = CacheContainer.getInstance().isTweetsCached();
+        boolean isConnected = CloudUtils.isConnected(context);
+
+        return tweetsNumber > 0 && (isCached || !isConnected);
     }
 }

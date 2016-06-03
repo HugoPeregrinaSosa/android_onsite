@@ -8,4 +8,7 @@
     <string name="tweet">Tweet</string>
 
     <string name="error_newtweet_nomorecharactersalowed">Your tweet can only have 140 characters</string>
+
+    <string name="tweet_post_successful">Your tweet has been published correctly</string>
+    <string name="tweet_post_error">Has been an error while we were publishing your tweet, please try again later</string>
 </resources>

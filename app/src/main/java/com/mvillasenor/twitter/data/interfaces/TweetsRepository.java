@@ -13,5 +13,6 @@ import rx.Observable;
 public interface TweetsRepository {
 
     Observable<List<Tweet>> getTweets();
+    Observable<Tweet> postTweet(String status);
 
 }

@@ -7,6 +7,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mvillasenor.twitter.data.TweetsRepositoryProvider;
+import com.mvillasenor.twitter.models.tweet.Tweet;
+
+import rx.functions.Action1;
 
 /**
  * Created by Shekomaru on 6/3/16.
@@ -62,12 +68,24 @@ public class NewTweetActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_newtweet_dotweet:
-                doTweet(((TextView) findViewById(R.id.et_newtweet_tweetcontent)).toString());
+                doTweet(((TextView) findViewById(R.id.et_newtweet_tweetcontent)).getText().toString());
                 break;
         }
     }
 
     private void doTweet(String tweetContent) {
-        //TweetsRepositoryProvider.getInstance().getTweetsRepository(true).pos
+        TweetsRepositoryProvider.getInstance().getTweetsRepository(true).postTweet(tweetContent)
+                .subscribe(new Action1<Tweet>() {
+                    @Override
+                    public void call(Tweet tweet) {
+                        Toast.makeText(NewTweetActivity.this, getResources().getString(R.string.tweet_post_successful), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Toast.makeText(NewTweetActivity.this, getResources().getString(R.string.tweet_post_error), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
