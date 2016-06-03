@@ -1,6 +1,7 @@
 package com.mvillasenor.twitter;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mvillasenor.twitter.activities.NewTweetActivity;
 import com.mvillasenor.twitter.view.fragments.ProfileFragment;
 import com.mvillasenor.twitter.view.fragments.TweetsFragment;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitleTextColor(Color.WHITE);
 
         setSupportActionBar(mToolbar);
 

@@ -10,13 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.mvillasenor.twitter.R;
-import com.mvillasenor.twitter.SingleTweetActivity;
+import com.mvillasenor.twitter.activities.SingleTweetActivity;
 import com.mvillasenor.twitter.SingleTweetViewLauncher;
 import com.mvillasenor.twitter.data.TweetsRepositoryProvider;
-import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 import com.mvillasenor.twitter.view.BaseFragment;
 import com.mvillasenor.twitter.view.adapters.TweetAdapter;
