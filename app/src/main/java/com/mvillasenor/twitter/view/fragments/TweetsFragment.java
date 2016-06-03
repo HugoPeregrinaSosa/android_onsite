@@ -69,6 +69,10 @@ public class TweetsFragment extends BaseFragment implements SingleTweetViewLaunc
         }
     }
 
+    public void searchAndReplaceTweets(String s){
+
+    }
+
     private void initializeListView() {
         tweetsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new TweetAdapter(getActivity(), tweetList, TweetsFragment.this);

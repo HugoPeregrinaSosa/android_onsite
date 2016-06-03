@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.mvillasenor.twitter.activities.NewTweetActivity;
+import com.mvillasenor.twitter.activities.SearchTweetActivity;
 import com.mvillasenor.twitter.view.fragments.ProfileFragment;
 import com.mvillasenor.twitter.view.fragments.TweetsFragment;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.action_search:
                 Log.d(TAG, "onOptionsItemSelected: search");
+                startActivity(new Intent(getApplicationContext(), SearchTweetActivity.class));
                 break;
             case R.id.action_settings:
                 Log.d(TAG, "onOptionsItemSelected: settings");
