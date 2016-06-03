@@ -10,7 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="5dp"
-        android:background="@drawable/newtweet_content_background" />
+        android:background="@drawable/newtweet_content_background"
+        android:gravity="top"
+        android:maxLength="140"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,7 +32,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:padding="5dp"
                 android:text="140"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />

@@ -6,4 +6,6 @@
     <string name="search">Search</string>
 
     <string name="tweet">Tweet</string>
+
+    <string name="error_newtweet_nomorecharactersalowed">Your tweet can only have 140 characters</string>
 </resources>
