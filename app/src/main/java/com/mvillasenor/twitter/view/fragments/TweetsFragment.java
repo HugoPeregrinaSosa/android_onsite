@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mvillasenor.twitter.R;
 import com.mvillasenor.twitter.SingleTweetActivity;
 import com.mvillasenor.twitter.SingleTweetViewLauncher;
 import com.mvillasenor.twitter.data.TweetsRepositoryProvider;
+import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 import com.mvillasenor.twitter.view.BaseFragment;
 import com.mvillasenor.twitter.view.adapters.TweetAdapter;
@@ -95,6 +97,15 @@ public class TweetsFragment extends BaseFragment implements SingleTweetViewLaunc
                             public void call(List<Tweet> tweets) {
                                 loadTweets(tweets);
                                 swipeRefreshLayout.setRefreshing(false);
+                                String id = tweets.get(0).getIdStr();
+                                TweetsRepositoryProvider.getInstance().getTweetsRepository(true)
+                                        .getTweet(id)
+                                        .subscribe(new Action1<Tweet>() {
+                                            @Override
+                                            public void call(Tweet tweet) {
+                                                Toast.makeText(getActivity(), tweet.getText(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
                             }
                         }
                         ,

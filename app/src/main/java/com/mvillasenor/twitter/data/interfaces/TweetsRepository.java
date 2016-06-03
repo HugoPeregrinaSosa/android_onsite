@@ -16,6 +16,6 @@ public interface TweetsRepository {
     Observable<List<Tweet>> getTweets();
     Observable<Tweet> postTweet(String status);
     Observable<SentimentResult> getSentiment(String text);
-    Observable<Tweet> getTweet(long id);
+    Observable<Tweet> getTweet(String id);
 
 }
