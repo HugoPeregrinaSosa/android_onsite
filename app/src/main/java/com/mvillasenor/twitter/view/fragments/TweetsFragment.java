@@ -122,10 +122,11 @@ public class TweetsFragment extends BaseFragment implements SingleTweetViewLaunc
     }
 
     @Override
-    public void showTweetInfo(Tweet tweet) {
-        Log.d(TAG, "showTweetInfo() called with: " + "tweet = [" + tweet + "]");
+    public void showTweetInfo(Long tweetId) {
+        Log.d(TAG, "showTweetInfo() called with: " + "tweetId = [" + tweetId + "]");
 
         Intent singleTweetIntent = new Intent(getContext(), SingleTweetActivity.class);
+        singleTweetIntent.putExtra("tweetId", tweetId);
         startActivity(singleTweetIntent);
 
     }

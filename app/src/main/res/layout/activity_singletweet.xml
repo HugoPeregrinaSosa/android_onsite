@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize" />
 
     <TextView
         android:id="@+id/tv_singletweet_content"
@@ -19,7 +19,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:src="@drawable/default_picture" />
 
     <Button
         android:id="@+id/bt_singletweet_share"

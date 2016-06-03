@@ -82,7 +82,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             if (singleTweetViewLauncher != null) {
-                singleTweetViewLauncher.showTweetInfo(tweets.get((int) v.getTag()));
+                singleTweetViewLauncher.showTweetInfo(tweets.get((int) v.getTag()).getId());
             }
         }
     }
