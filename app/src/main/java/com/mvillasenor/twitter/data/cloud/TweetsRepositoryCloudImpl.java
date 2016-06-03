@@ -38,4 +38,20 @@ public class TweetsRepositoryCloudImpl implements TweetsRepository {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    @Override
+    public Observable<Tweet> postTweet(String status) {
+        return tweetsClient.postTweet(status)
+                .doOnNext(new Action1<Tweet>() {
+                    @Override
+                    public void call(Tweet tweet) {
+                        Realm realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(tweet);
+                        realm.commitTransaction();
+                    }
+                })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

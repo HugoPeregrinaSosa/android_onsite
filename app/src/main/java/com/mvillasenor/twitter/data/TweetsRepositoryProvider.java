@@ -44,10 +44,10 @@ public class TweetsRepositoryProvider {
         return instance;
     }
 
-    public TweetsRepository getTweetsRepository(boolean forceUpdate) {
+    public TweetsRepository getTweetsRepository(boolean forceCloud) {
         Realm realm = Realm.getDefaultInstance();
         long tweetsNumber = realm.where(Tweet.class).count();
-        if (tweetsNumber > 0 && !forceUpdate) {
+        if (tweetsNumber > 0 && !forceCloud) {
             return new TweetsRepositoryDbImpl();
         } else {
             TweetsClient client = retrofitClient.getTweetsClient();

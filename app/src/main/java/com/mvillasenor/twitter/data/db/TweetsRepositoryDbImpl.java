@@ -31,4 +31,9 @@ public class TweetsRepositoryDbImpl implements TweetsRepository {
                     }
                 });
     }
+
+    @Override
+    public Observable<Tweet> postTweet(String status) {
+        throw new RuntimeException("Method not implemented");
+    }
 }
