@@ -76,6 +76,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             username = (TextView) itemView.findViewById(R.id.user_name);
             tweetText = (TextView) itemView.findViewById(R.id.tweet_content);
 
+            username.setTextColor(context.getResources().getColor(android.R.color.black));
+            tweetText.setTextColor(context.getResources().getColor(android.R.color.black));
+
             itemView.setOnClickListener(this);
         }
 
