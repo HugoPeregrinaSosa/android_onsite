@@ -1,8 +1,12 @@
 package com.mvillasenor.twitter.activities;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,10 +26,8 @@ import rx.functions.Action1;
  */
 public class NewTweetActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "NewTweetActivity";
-
-    private int MAX_TWEET_LENGHT = 140;
-
     Toolbar mToolbar;
+    private int MAX_TWEET_LENGHT = 140;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,36 @@ public class NewTweetActivity extends AppCompatActivity implements View.OnClickL
         });
 
         super.onCreate(savedInstanceState);
+
+        RecyclerView photosRecycler = (RecyclerView) findViewById(R.id.rv_newtweet_photos);
+        fillRecyclerviewWithPhotos(photosRecycler);
+    }
+
+    private void fillRecyclerviewWithPhotos(RecyclerView photosRecycler) {
+        int count;
+        Bitmap[] thumbnails;
+        boolean[] thumbnailsselection;
+        String[] arrPath;
+
+        final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+        final String orderBy = MediaStore.Images.Media._ID;
+        Cursor imagecursor = managedQuery(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
+                null, orderBy);
+        int image_column_index = imagecursor.getColumnIndex(MediaStore.Images.Media._ID);
+        count = imagecursor.getCount();
+        thumbnails = new Bitmap[count];
+        arrPath = new String[count];
+        thumbnailsselection = new boolean[count];
+        for (int i = 0; i < count; i++) {
+            imagecursor.moveToPosition(i);
+            int id = imagecursor.getInt(image_column_index);
+            int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
+            thumbnails[i] = MediaStore.Images.Thumbnails.getThumbnail(
+                    getApplicationContext().getContentResolver(), id,
+                    MediaStore.Images.Thumbnails.MICRO_KIND, null);
+            arrPath[i] = imagecursor.getString(dataColumnIndex);
+        }
     }
 
     @Override
