@@ -9,6 +9,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -22,5 +23,8 @@ public interface TweetsClient {
     @POST("/api/statuses/update")
     @FormUrlEncoded
     Observable<Tweet> postTweet(@Field("status") String status);
+
+    @GET("/api/statuses/show/{id}")
+    Observable<Tweet> getTweet(@Path("id") String id);
 
 }

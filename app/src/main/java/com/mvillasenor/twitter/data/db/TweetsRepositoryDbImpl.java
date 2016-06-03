@@ -44,4 +44,20 @@ public class TweetsRepositoryDbImpl implements TweetsRepository {
     public Observable<SentimentResult> getSentiment(String text) {
         throw new RuntimeException("Method not implemented");
     }
+
+    @Override
+    public Observable<Tweet> getTweet(String id) {
+        final Realm realm = Realm.getDefaultInstance();
+
+        return realm.where(Tweet.class)
+                .equalTo("idStr", id)
+                .findFirst()
+                .<Tweet>asObservable()
+                .map(new Func1<Tweet, Tweet>() {
+                    @Override
+                    public Tweet call(Tweet tweet) {
+                        return realm.copyFromRealm(tweet);
+                    }
+                });
+    }
 }
