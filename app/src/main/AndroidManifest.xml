@@ -28,8 +28,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".SingleTweetActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:name=".SingleTweetActivity"/>
 
     </application>
 

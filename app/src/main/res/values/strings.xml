@@ -20,4 +20,8 @@
     <string name="tweet_post_error">Has been an error while we were publishing your tweet, please try again later</string>
 
     <string name="share">Share</string>
+
+    <string name="send_to">Send to:</string>
+
+    <string name="reply">Reply:</string>
 </resources>
