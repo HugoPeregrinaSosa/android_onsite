@@ -1,5 +1,6 @@
 package com.mvillasenor.twitter.data.cloud.retrofit.interfaces;
 
+import com.mvillasenor.twitter.models.tweet.SearchResponse;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 import com.mvillasenor.twitter.models.user.User;
 
@@ -26,5 +27,8 @@ public interface TweetsClient {
 
     @GET("/api/statuses/show/{id}")
     Observable<Tweet> getTweet(@Path("id") String id);
+
+    @GET("/api/search/{query}")
+    Observable<SearchResponse> search(@Path("query") String query);
 
 }

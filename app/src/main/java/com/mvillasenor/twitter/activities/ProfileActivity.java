@@ -14,7 +14,7 @@ import com.mvillasenor.twitter.view.fragments.ProfileSettingsFragment;
  */
 public class ProfileActivity extends AppCompatActivity {
 
-    Toolbar mToolbar;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

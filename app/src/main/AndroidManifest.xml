@@ -27,11 +27,12 @@
         <activity
             android:windowSoftInputMode="stateHidden"
             android:name=".activities.NewTweetActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
 
         <activity
             android:name=".activities.SingleTweetActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".activities.SearchTweetActivity"

@@ -96,6 +96,7 @@ public class ProfileSettingsFragment extends BaseFragment implements DatePickerF
         description.setText(user.getDescription());
         location.setText(user.getLocation());
         website.setText(user.getWebsite());
+        birthday.setText(user.getBirthday());
 
         Glide.with(getActivity())
                 .load(user.getProfileImageUrl())

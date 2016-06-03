@@ -5,6 +5,7 @@ import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.SentimentClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.TweetsClient;
 import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
 import com.mvillasenor.twitter.models.sentiment.SentimentResult;
+import com.mvillasenor.twitter.models.tweet.SearchResponse;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import io.realm.Realm;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -73,6 +75,20 @@ public class TweetsRepositoryCloudImpl implements TweetsRepository {
     public Observable<Tweet> getTweet(String id) {
         return tweetsClient
                 .getTweet(id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<List<Tweet>> search(String search) {
+        return tweetsClient
+                .search(search)
+                .map(new Func1<SearchResponse, List<Tweet>>() {
+                    @Override
+                    public List<Tweet> call(SearchResponse searchResponse) {
+                        return searchResponse.getStatuses();
+                    }
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -60,4 +60,9 @@ public class TweetsRepositoryDbImpl implements TweetsRepository {
                     }
                 });
     }
+
+    @Override
+    public Observable<List<Tweet>> search(String search) {
+        throw new RuntimeException("Method not implemented");
+    }
 }
