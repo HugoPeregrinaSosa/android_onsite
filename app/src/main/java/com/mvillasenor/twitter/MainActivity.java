@@ -1,16 +1,18 @@
 package com.mvillasenor.twitter;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
-import com.mvillasenor.twitter.view.BaseFragment;
 import com.mvillasenor.twitter.view.fragments.ProfileFragment;
 import com.mvillasenor.twitter.view.fragments.TweetsFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "MainActivity";
 
     private Toolbar mToolbar;
 
@@ -23,15 +25,55 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, TweetsFragment.newInstance())
                     .replace(R.id.header, ProfileFragment.newInstance())
                     .commit();
         }
+
+        findViewById(R.id.fab_main_addtweet).setOnClickListener(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab_main_addtweet:
+                addNewTweet();
+                break;
+        }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Log.d(TAG, "onOptionsItemSelected: search");
+                break;
+            case R.id.action_settings:
+                Log.d(TAG, "onOptionsItemSelected: settings");
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addNewTweet() {
+
+    }
+
+    private void goToSearch() {
+
+    }
+
+    private void goToSettings() {
+
+    }
 }
