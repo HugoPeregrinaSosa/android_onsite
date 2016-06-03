@@ -12,7 +12,7 @@ import rx.Observable;
  */
 public interface SentimentClient {
 
-    @POST
+    @POST("/api/sentiment/")
     @FormUrlEncoded
     Observable<SentimentResult> getSentiment(@Field("text") String text);
 

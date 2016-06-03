@@ -62,7 +62,7 @@ public class RetrofitClient {
     }
 
     public SentimentClient getSentimentClient() {
-        return twitter.create(SentimentClient.class);
+        return sentiment.create(SentimentClient.class);
     }
 
 }

@@ -11,10 +11,18 @@
             android:layout_height="?attr/actionBarSize" />
     -->
 
+    <ProgressBar
+        android:id="@+id/pb_singletweet_loadingsentiment"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal" />
+
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/civ_singletweet_analysis"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:id="@+id/iv_singletweet_analysis"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_singletweet_content"

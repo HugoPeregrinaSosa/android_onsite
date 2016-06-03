@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.data.TweetsRepositoryProvider;
+import com.mvillasenor.twitter.models.sentiment.SentimentResult;
+
+import rx.functions.Action1;
 
 /**
  * Created by Shekomaru on 6/3/16.
@@ -59,6 +64,34 @@ public class SingleTweetActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void doSentimentAnalisys(String textToAnalyze) {
-        
+        TweetsRepositoryProvider.getInstance().getTweetsRepository(true).getSentiment(textToAnalyze)
+                .subscribe(new Action1<SentimentResult>() {
+                    @Override
+                    public void call(SentimentResult sentimentResult) {
+                        String sentimentResultLabel = sentimentResult.getLabel();
+
+                        findViewById(R.id.pb_singletweet_loadingsentiment).setVisibility(View.GONE);
+                        findViewById(R.id.iv_singletweet_analysis).setVisibility(View.VISIBLE);
+
+                        ImageView sentimentIndicator = (ImageView) findViewById(R.id.iv_singletweet_analysis);
+
+                        switch (sentimentResultLabel) {
+                            case "neutral":
+                                sentimentIndicator.setImageResource(R.drawable.neutface);
+                                break;
+                            case "neg":
+                                sentimentIndicator.setImageResource(R.drawable.negface);
+                                break;
+                            case "pos":
+                                sentimentIndicator.setImageResource(R.drawable.posface);
+                                break;
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
     }
 }
