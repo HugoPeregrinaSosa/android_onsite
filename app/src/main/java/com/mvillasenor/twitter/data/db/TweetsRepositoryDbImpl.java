@@ -46,11 +46,11 @@ public class TweetsRepositoryDbImpl implements TweetsRepository {
     }
 
     @Override
-    public Observable<Tweet> getTweet(long id) {
+    public Observable<Tweet> getTweet(String id) {
         final Realm realm = Realm.getDefaultInstance();
 
         return realm.where(Tweet.class)
-                .equalTo("id", id)
+                .equalTo("idStr", id)
                 .findFirst()
                 .<Tweet>asObservable()
                 .map(new Func1<Tweet, Tweet>() {

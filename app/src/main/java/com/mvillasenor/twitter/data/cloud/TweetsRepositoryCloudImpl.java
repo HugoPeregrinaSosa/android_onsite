@@ -70,7 +70,10 @@ public class TweetsRepositoryCloudImpl implements TweetsRepository {
     }
 
     @Override
-    public Observable<Tweet> getTweet(long id) {
-        return null;
+    public Observable<Tweet> getTweet(String id) {
+        return tweetsClient
+                .getTweet(id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }
