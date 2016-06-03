@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Twitter</string>
+    <string name="base_url">https://wizetwitterproxy.herokuapp.com</string>
+</resources>
