@@ -6,6 +6,7 @@ import android.util.Log;
 import com.mvillasenor.twitter.data.cloud.CloudUtils;
 import com.mvillasenor.twitter.data.cloud.TweetsRepositoryCloudImpl;
 import com.mvillasenor.twitter.data.cloud.retrofit.RetrofitClient;
+import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.SentimentClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.TweetsClient;
 import com.mvillasenor.twitter.data.db.TweetsRepositoryDbImpl;
 import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
@@ -51,7 +52,8 @@ public class TweetsRepositoryProvider {
             return new TweetsRepositoryDbImpl();
         } else {
             TweetsClient client = retrofitClient.getTweetsClient();
-            return new TweetsRepositoryCloudImpl(client);
+            SentimentClient sentimentClient = retrofitClient.getSentimentClient();
+            return new TweetsRepositoryCloudImpl(client, sentimentClient);
         }
     }
 
