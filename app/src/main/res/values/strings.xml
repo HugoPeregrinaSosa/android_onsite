@@ -6,6 +6,7 @@
     <string name="search">Search</string>
     <string name="sentiment_base_url">http://text-processing.com/</string>
     <string name="profile">Profile</string>
+    <string name="new_tweet">New Tweet</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="location">Location</string>

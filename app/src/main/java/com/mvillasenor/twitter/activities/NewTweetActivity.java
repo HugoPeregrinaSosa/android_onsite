@@ -1,7 +1,9 @@
-package com.mvillasenor.twitter;
+package com.mvillasenor.twitter.activities;
 
-import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mvillasenor.twitter.R;
 import com.mvillasenor.twitter.data.TweetsRepositoryProvider;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 
@@ -17,14 +20,24 @@ import rx.functions.Action1;
 /**
  * Created by Shekomaru on 6/3/16.
  */
-public class NewTweetActivity extends Activity implements View.OnClickListener {
+public class NewTweetActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "NewTweetActivity";
 
     private int MAX_TWEET_LENGHT = 140;
 
+    Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_new_tweet);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle(getString(R.string.new_tweet));
+        mToolbar.setTitleTextColor(Color.WHITE);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.bt_newtweet_dotweet).setOnClickListener(this);
 

@@ -24,8 +24,8 @@
             android:parentActivityName=".MainActivity"/>
 
         <activity
-            android:name=".NewTweetActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".activities.NewTweetActivity"
+            android:parentActivityName=".MainActivity">
 
         </activity>
 
