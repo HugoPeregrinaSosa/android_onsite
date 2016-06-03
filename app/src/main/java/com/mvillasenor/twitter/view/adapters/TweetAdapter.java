@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.SingleTweetViewLauncher;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 
 import java.util.List;
@@ -21,24 +22,18 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     private Context context;
     private List<Tweet> tweets;
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView profilePicture;
-        public TextView username;
-        public TextView tweetText;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            profilePicture = (ImageView) itemView.findViewById(R.id.profile_picture);
-            username = (TextView) itemView.findViewById(R.id.user_name);
-            tweetText = (TextView) itemView.findViewById(R.id.tweet_content);
-        }
-    }
+    private SingleTweetViewLauncher singleTweetViewLauncher;
 
     public TweetAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
         this.tweets = tweets;
+        this.singleTweetViewLauncher = null;
+    }
+
+    public TweetAdapter(Context context, List<Tweet> tweets, SingleTweetViewLauncher singleTweetViewLauncher) {
+        this.context = context;
+        this.tweets = tweets;
+        this.singleTweetViewLauncher = singleTweetViewLauncher;
     }
 
     @Override
@@ -60,11 +55,36 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 .error(R.drawable.default_picture)
                 .into(holder.profilePicture);
 
+        holder.itemView.setTag(position);
+
     }
 
     @Override
     public int getItemCount() {
         return tweets.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public ImageView profilePicture;
+        public TextView username;
+        public TextView tweetText;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            profilePicture = (ImageView) itemView.findViewById(R.id.profile_picture);
+            username = (TextView) itemView.findViewById(R.id.user_name);
+            tweetText = (TextView) itemView.findViewById(R.id.tweet_content);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (singleTweetViewLauncher != null) {
+                singleTweetViewLauncher.showTweetInfo(tweets.get((int) v.getTag()));
+            }
+        }
     }
 
 

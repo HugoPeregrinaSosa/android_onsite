@@ -11,4 +11,6 @@
 
     <string name="tweet_post_successful">Your tweet has been published correctly</string>
     <string name="tweet_post_error">Has been an error while we were publishing your tweet, please try again later</string>
+
+    <string name="share">Share</string>
 </resources>

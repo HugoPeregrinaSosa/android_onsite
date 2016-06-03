@@ -1,5 +1,6 @@
 package com.mvillasenor.twitter.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.SingleTweetActivity;
+import com.mvillasenor.twitter.SingleTweetViewLauncher;
 import com.mvillasenor.twitter.data.TweetsRepositoryProvider;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 import com.mvillasenor.twitter.view.BaseFragment;
@@ -21,18 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by migue on 31/05/2016.
  */
-public class TweetsFragment extends BaseFragment {
+public class TweetsFragment extends BaseFragment implements SingleTweetViewLauncher {
+    private static final String TAG = "TweetsFragment";
 
     private RecyclerView tweetsRecycler;
     private TweetAdapter adapter;
-    private List<Tweet> tweetList = new ArrayList<>();;
+    private List<Tweet> tweetList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private Subscription tweetsSubscription;
@@ -70,11 +72,11 @@ public class TweetsFragment extends BaseFragment {
 
     private void initializeListView() {
         tweetsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new TweetAdapter(getActivity(), tweetList);
+        adapter = new TweetAdapter(getActivity(), tweetList, TweetsFragment.this);
         tweetsRecycler.setAdapter(adapter);
     }
 
-    private void initializeSwipeRefresh(){
+    private void initializeSwipeRefresh() {
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -116,7 +118,7 @@ public class TweetsFragment extends BaseFragment {
 
 
     public void loadTweets(List<Tweet> tweets) {
-        adapter = new TweetAdapter(getActivity(), tweets);
+        adapter = new TweetAdapter(getActivity(), tweets, TweetsFragment.this);
         tweetsRecycler.setAdapter(adapter);
     }
 
@@ -125,4 +127,12 @@ public class TweetsFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void showTweetInfo(Tweet tweet) {
+        Log.d(TAG, "showTweetInfo() called with: " + "tweet = [" + tweet + "]");
+
+        Intent singleTweetIntent = new Intent(getContext(), SingleTweetActivity.class);
+        startActivity(singleTweetIntent);
+
+    }
 }
