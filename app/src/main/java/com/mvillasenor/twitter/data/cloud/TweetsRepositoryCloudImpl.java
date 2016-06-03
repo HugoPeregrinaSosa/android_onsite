@@ -1,8 +1,10 @@
 package com.mvillasenor.twitter.data.cloud;
 
 import com.mvillasenor.twitter.data.CacheContainer;
+import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.SentimentClient;
 import com.mvillasenor.twitter.data.cloud.retrofit.interfaces.TweetsClient;
 import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
+import com.mvillasenor.twitter.models.sentiment.SentimentResult;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 
 import java.util.List;
@@ -19,9 +21,11 @@ import rx.schedulers.Schedulers;
 public class TweetsRepositoryCloudImpl implements TweetsRepository {
 
     private TweetsClient tweetsClient;
+    private SentimentClient sentimentClient;
 
-    public TweetsRepositoryCloudImpl(TweetsClient tweetsClient) {
+    public TweetsRepositoryCloudImpl(TweetsClient tweetsClient, SentimentClient sentimentClient) {
         this.tweetsClient = tweetsClient;
+        this.sentimentClient = sentimentClient;
     }
 
     @Override
@@ -54,6 +58,13 @@ public class TweetsRepositoryCloudImpl implements TweetsRepository {
                         CacheContainer.getInstance().setTweetsCached(true);
                     }
                 })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<SentimentResult> getSentiment(String text) {
+        return sentimentClient.getSentiment(text)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }

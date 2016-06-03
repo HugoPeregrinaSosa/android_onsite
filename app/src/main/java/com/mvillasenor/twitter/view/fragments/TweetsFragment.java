@@ -3,7 +3,6 @@ package com.mvillasenor.twitter.view.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -121,11 +120,6 @@ public class TweetsFragment extends BaseFragment implements SingleTweetViewLaunc
         adapter = new TweetAdapter(getActivity(), tweets, TweetsFragment.this);
         tweetsRecycler.setAdapter(adapter);
     }
-
-    public void showError(String error) {
-        Snackbar.make(getView(), error, Snackbar.LENGTH_SHORT).show();
-    }
-
 
     @Override
     public void showTweetInfo(Tweet tweet) {

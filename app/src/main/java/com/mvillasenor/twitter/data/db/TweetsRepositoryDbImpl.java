@@ -2,6 +2,7 @@ package com.mvillasenor.twitter.data.db;
 
 import com.mvillasenor.twitter.data.interfaces.TweetsRepository;
 import com.mvillasenor.twitter.data.interfaces.UserRepository;
+import com.mvillasenor.twitter.models.sentiment.SentimentResult;
 import com.mvillasenor.twitter.models.tweet.Tweet;
 import com.mvillasenor.twitter.models.user.User;
 
@@ -36,6 +37,11 @@ public class TweetsRepositoryDbImpl implements TweetsRepository {
 
     @Override
     public Observable<Tweet> postTweet(String status) {
+        throw new RuntimeException("Method not implemented");
+    }
+
+    @Override
+    public Observable<SentimentResult> getSentiment(String text) {
         throw new RuntimeException("Method not implemented");
     }
 }
