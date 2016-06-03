@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.view.fragments.ProfileSettingsFragment;
 
 /**
  * Created by MarthaKarina on 03/06/2016.
@@ -25,6 +26,12 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        if(savedInstanceState == null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, ProfileSettingsFragment.newInstance())
+                    .commit();
+        }
 
     }
 }
