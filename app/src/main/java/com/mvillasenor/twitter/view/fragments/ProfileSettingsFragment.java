@@ -9,12 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.data.UserRepositoryProvider;
+import com.mvillasenor.twitter.models.user.User;
 import com.mvillasenor.twitter.view.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * Created by MarthaKarina on 03/06/2016.
@@ -38,6 +44,8 @@ public class ProfileSettingsFragment extends BaseFragment {
     @BindView(R.id.save)
     Button save;
 
+    Subscription subscription;
+
     public static ProfileSettingsFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -56,7 +64,63 @@ public class ProfileSettingsFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUser();
+    }
+
+    public void loadUser() {
+        subscription = UserRepositoryProvider.getInstance()
+                .getUserRepository()
+                .getUser()
+                .subscribe(new Action1<User>() {
+                    @Override
+                    public void call(User user) {
+                        loadData(user);
+                    }
+                });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        subscription.unsubscribe();
+    }
+
+    public void loadData(User user) {
+        userName.setText(user.getName());
+        description.setText(user.getDescription());
+        location.setText(user.getLocation());
+
+        Glide.with(getActivity())
+                .load(user.getProfileImageUrl())
+                .error(R.drawable.default_picture)
+                .placeholder(R.drawable.default_picture)
+                .into(profilePicture);
+
+        Glide.with(getActivity())
+                .load(user.getProfileBackgroundImageUrl())
+                .centerCrop()
+                .into(backgroundImage);
+
+
+    }
+
     @OnClick(R.id.save)
     public void onClick() {
+        Realm realm = Realm.getDefaultInstance();
+        User user = realm.where(User.class)
+                .findFirst();
+
+        realm.beginTransaction();
+        user.setName(userName.getText().toString());
+        user.setDescription(description.getText().toString());
+        user.setWebsite(website.getText().toString());
+        user.setBirthday(birthday.getText().toString());
+        user.setLocation(location.getText().toString());
+        realm.copyToRealmOrUpdate(user);
+        realm.commitTransaction();
+        getActivity().finish();
     }
 }

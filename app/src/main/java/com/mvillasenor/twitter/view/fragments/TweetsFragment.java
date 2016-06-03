@@ -96,14 +96,6 @@ public class TweetsFragment extends BaseFragment {
                                 loadTweets(tweets);
                                 swipeRefreshLayout.setRefreshing(false);
                                 String id = tweets.get(0).getIdStr();
-                                TweetsRepositoryProvider.getInstance().getTweetsRepository(true)
-                                        .getTweet(id)
-                                        .subscribe(new Action1<Tweet>() {
-                                            @Override
-                                            public void call(Tweet tweet) {
-                                                Toast.makeText(getActivity(), tweet.getText(), Toast.LENGTH_LONG).show();
-                                            }
-                                        });
                             }
                         }
                         ,
