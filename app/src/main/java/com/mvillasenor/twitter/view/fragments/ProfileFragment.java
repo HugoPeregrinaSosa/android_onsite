@@ -1,5 +1,6 @@
 package com.mvillasenor.twitter.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mvillasenor.twitter.R;
+import com.mvillasenor.twitter.activities.ProfileActivity;
 import com.mvillasenor.twitter.data.UserRepositoryProvider;
 import com.mvillasenor.twitter.models.user.User;
 import com.mvillasenor.twitter.view.BaseFragment;
@@ -50,6 +52,8 @@ public class ProfileFragment extends BaseFragment {
         mUserName = (TextView) view.findViewById(R.id.user_name);
         mDescription = (TextView) view.findViewById(R.id.description);
 
+        setUpListeners();
+
         return view;
     }
 
@@ -57,6 +61,16 @@ public class ProfileFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         requestUser();
+    }
+
+    public void setUpListeners(){
+        mProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
 
